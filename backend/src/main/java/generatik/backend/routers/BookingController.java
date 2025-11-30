@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ import generatik.backend.services.BookingService;
 @RestController
 @RequestMapping("/api/v1/booking-requests")
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:5173" })
+@Tag(name = "Bookings", description = "Create and manage booking requests")
 public class BookingController {
 
   private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
@@ -39,6 +42,7 @@ public class BookingController {
   }
 
   @PostMapping(value = "")
+  @Operation(summary = "Create a booking request")
   public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingCreationDTO bookingDTO) {
     logger.info("POST /api/v1/booking-requests called to create booking");
 
@@ -77,6 +81,7 @@ public class BookingController {
   }
 
   @GetMapping(value = "/{id}")
+  @Operation(summary = "Get a booking request by ID")
   public ResponseEntity<BookingDTO> getBookingById(@PathVariable Long id) {
     logger.info("GET /api/v1/booking-requests/{} called", id);
 
@@ -92,6 +97,7 @@ public class BookingController {
   }
 
   @PatchMapping(value = "/{id}/approve")
+  @Operation(summary = "Approve a booking request")
   public ResponseEntity<BookingDTO> approveBooking(@PathVariable Long id) {
     logger.info("PATCH /api/v1/booking-requests/{}/approve called", id);
 
@@ -102,6 +108,7 @@ public class BookingController {
   }
 
   @PatchMapping(value = "/{id}/reject")
+  @Operation(summary = "Reject a booking request")
   public ResponseEntity<BookingDTO> rejectBooking(@PathVariable Long id) {
     logger.info("PATCH /api/v1/booking-requests/{}/reject called", id);
 
@@ -112,6 +119,7 @@ public class BookingController {
   }
 
   @GetMapping(value = "")
+  @Operation(summary = "List booking requests (optionally filtered by status)")
   public ResponseEntity<List<BookingDTO>> getAll(
       @RequestParam(name = "status", required = false) Status status) {
 

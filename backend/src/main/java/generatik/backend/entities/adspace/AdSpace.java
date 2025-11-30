@@ -7,8 +7,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 
 @Entity(name = "ad_spaces")
+@Table(name = "ad_spaces", indexes = {
+    @Index(name = "idx_ad_spaces_city_type", columnList = "city,type")
+})
 public class AdSpace {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

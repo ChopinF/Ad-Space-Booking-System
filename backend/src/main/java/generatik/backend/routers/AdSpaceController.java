@@ -22,10 +22,13 @@ import generatik.backend.entities.adspace.AdSpaceType;
 import generatik.backend.entities.adspace.City;
 import generatik.backend.services.AdSpaceService;
 import generatik.backend.services.BookingService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/ad-spaces")
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:5173" })
+@Tag(name = "Ad Spaces", description = "Retrieve, update and delete advertising spaces")
 public class AdSpaceController {
   private static final Logger logger = LoggerFactory.getLogger(AdSpaceController.class);
   private final AdSpaceService adSpaceService;
@@ -35,6 +38,8 @@ public class AdSpaceController {
   }
 
   @GetMapping("")
+  @Operation(summary = "List ad spaces", description = "Returns a list of ad spaces filtered by type and city", tags = {
+      "Ad Spaces" })
   public ResponseEntity<List<AdSpaceDTO>> getAllAdSpaces(
       @RequestParam(name = "type", required = false) AdSpaceType type,
       @RequestParam(name = "city", required = false) City city) {
@@ -47,6 +52,7 @@ public class AdSpaceController {
   }
 
   @GetMapping("/{id}")
+  @Operation(summary = "Get ad space by ID", tags = { "Ad Spaces" })
   public ResponseEntity<AdSpaceDTO> getAdSpaceById(@PathVariable Long id) {
     logger.info("GET /api/v1/ad-spaces/{} called", id);
     return adSpaceService.getById(id)
@@ -61,6 +67,7 @@ public class AdSpaceController {
   }
 
   @DeleteMapping("/{id}")
+  @Operation(summary = "Delete ad space", description = "Deletes an ad space by ID", tags = { "Ad Spaces" })
   public ResponseEntity<Void> deleteAdSpace(@PathVariable Long id) {
     logger.info("DELETE /api/v1/ad-spaces/{} called", id);
     if (!adSpaceService.getById(id).isPresent()) {
@@ -73,6 +80,7 @@ public class AdSpaceController {
   }
 
   @PutMapping("/{id}")
+  @Operation(summary = "Update ad space", description = "Updates an ad space by ID", tags = { "Ad Spaces" })
   public ResponseEntity<AdSpaceDTO> updateAdSpace(
       @PathVariable Long id,
       @RequestBody AdSpaceDTO adSpaceDTO) {

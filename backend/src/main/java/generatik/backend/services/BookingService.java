@@ -28,8 +28,7 @@ public class BookingService {
 
   public BookingDTO createBooking(BookingCreationDTO dto) {
     var adSpaceOptional = this.adSpaceRepository.findById(dto.adSpaceId());// we get first the actual space, to compute
-                                                                           // the
-    // total price
+                                                                           // the total price
     if (adSpaceOptional.isEmpty()) {
       throw new IllegalArgumentException("Ad space not found: " + dto.adSpaceId());
     }
@@ -142,5 +141,4 @@ public class BookingService {
         saved.getTotalCost());
   }
 
-  // TODO: encapsulate methode toDTO
 }

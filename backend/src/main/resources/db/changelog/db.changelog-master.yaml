@@ -1,0 +1,187 @@
+databaseChangeLog:
+- changeSet:
+    id: 1764545510014-1
+    author: alex (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: price_per_day
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: ad_spaces_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: address
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: availability_status
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: city
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: type
+            type: VARCHAR(255)
+        tableName: ad_spaces
+- changeSet:
+    id: 1764545510014-2
+    author: alex (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: end_date
+            type: date
+        - column:
+            name: start_date
+            type: date
+        - column:
+            name: total_cost
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: ad_space_id
+            type: BIGINT
+        - column:
+            name: created_at
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: bookings_pkey
+            name: id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+            name: advertiser_name
+            type: VARCHAR(20)
+        - column:
+            constraints:
+              nullable: false
+            name: advertiser_email
+            type: VARCHAR(255)
+        - column:
+            name: status
+            type: VARCHAR(255)
+        tableName: bookings
+- changeSet:
+    id: 1764545510014-3
+    author: alex (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: city
+        - column:
+            name: type
+        indexName: idx_ad_spaces_city_type
+        tableName: ad_spaces
+- changeSet:
+    id: 1764545510014-4
+    author: alex (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: ad_spaces_name_key
+        tableName: ad_spaces
+- changeSet:
+    id: 1764545510014-5
+    author: alex (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: status
+        indexName: idx_bookings_status
+        tableName: bookings
+- changeSet:
+    id: 1764545510014-6
+    author: alex (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: ad_space_id
+        indexName: idx_bookings_ad_space_id
+        tableName: bookings
+- changeSet:
+    id: 1764545510014-7
+    author: alex (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: advertiser_email
+        constraintName: bookings_advertiser_email_key
+        tableName: bookings
+- changeSet:
+    id: 1764545510014-8
+    author: alex (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: advertiser_name
+        constraintName: bookings_advertiser_name_key
+        tableName: bookings
+- changeSet:
+    id: 1764545510014-9
+    author: alex (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 50
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: ad_spaces_seq
+        startValue: 1
+- changeSet:
+    id: 1764545510014-10
+    author: alex (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 50
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: bookings_seq
+        startValue: 1
+- changeSet:
+    id: 1764545510014-11
+    author: alex (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: ad_space_id
+        baseTableName: bookings
+        constraintName: fk1qoj43r03scnx2ep0y3xqu1rx
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: ad_spaces
+        validate: true
+

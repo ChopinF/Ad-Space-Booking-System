@@ -67,5 +67,4 @@ public class AdSpaceService {
         ad.getType());
   }
 
-  // TODO: encapsulate methode toDTO
 }
