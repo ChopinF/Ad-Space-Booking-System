@@ -3,6 +3,9 @@
 ## Demo video - assets/filmareGeneratik.mp4
 
 ![video](./assets/filmareGeneratik.mp4)
+<video width="640" controls>
+  <source src="https://raw.githack.com/ChopinF/Ad-Space-Booking-System/main/assets/filmareGeneratik.mp4" type="video/mp4">
+</video>
 
 ## How to run ?
 
